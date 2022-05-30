@@ -1,8 +1,12 @@
 let db = require("../models/dbc").get()
-
+const sequelize = require("sequelize")
 
 exports.getAll =()=>{
-    return db.Service.findAll()
+    return db.Service.findAll({ include:[{
+        model : db.User, attributes:['username'] },{
+            model : db.Member, attributes:['name']}
+            
+        ]})
             
 }
 
@@ -10,7 +14,7 @@ exports.getOne=(id)=>{
     return db.Service.findByPk(id)
 }
 
-exports.insert= (service)=>{
+exports.create= (service)=>{
     return db.Service.create(service) 
 }
 
@@ -24,7 +28,10 @@ exports.delete = (id)=>{
 exports.getOneByName=(label) => {
     return db.Service.findOne({
         where: {
-          label: label 
+          service: label 
         }
       })
+}
+exports.findOne=(label) => {
+    return db.Service.findOne(label)
 }

@@ -2,10 +2,42 @@
 const userRepository = require("../repository/user-repository")
 const roleRepository= require("../repository/role-repository")
 const config = require("../config/auth.config");
+let passwordValidator = require("password-validator");
+let schema = new passwordValidator();
+let emailValidator= require("email-validator");
+
+schema
+  .is().min(8, 'Minimun 8 characters')
+  .is().max(20 ,'Maximun 20 characters')
+  .has().uppercase(1,'Minimun 1 characters UpperCase')
+  .has().lowercase(1,'Minimun 1 characters lowerCase')
+  .has().digits(2, 'Mininum 2 numbers')                                // Must have at least 2 digits
+  .has().not().spaces(0,'Password should have no space')                           // Should not have spaces
+  .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
+  if(!req.body.username ){
+    return res.status(400).send({ message: "Username not provided." });
+  }
+  if (req.body.username > limitString(req.body.username, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if (req.body.email > limitString(req.body.email, 100)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+  }
+  if(!req.body.email){
+    return res.status(404).send({ message:"email not provided"})
+  }
+  if(!emailValidator.validate(req.body.email)){
+        return res.status(400).send({message: 'Invalid email'});
+   }
+  if(!schema.validate(req.body.password)){
+    
+       return res.status(400).send({ message : schema.validate(req.body.password,{details:true})});
+   } 
+  
   // Save User to Database
   userRepository.create({
     username: req.body.username,
@@ -13,9 +45,9 @@ exports.signup = (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8)
   })
     .then(user => {
-      if (req.body.roles) {
+      if (req.body.Roles) {
         //get the list of roles from the roles
-        roleRepository.getListRole(req.body.roles)
+        roleRepository.getListRole(req.body.Roles)
         .then(roles => {
           user.setRoles(roles).then(() => {
             res.send({ message: "User was registered successfully!" });
@@ -23,7 +55,7 @@ exports.signup = (req, res) => {
         });
       } else {
         // user role = 2
-        user.setRoles([2]).then(() => {
+        user.setRoles([1]).then(() => {
           res.send({ message: "User was registered successfully!" });
         });
       }
@@ -144,6 +176,25 @@ exports.insert= (req, res, next)=>{
 }
 
 exports.update= (req, res, next)=>{
+  if(!req.body.username ){
+    return res.status(400).send({ message: "Username not provided." });
+  }
+  if (req.body.username > limitString(req.body.username, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if (req.body.email > limitString(req.body.email, 100)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+  }
+  if(!req.body.email){
+    return res.status(404).send({ message:"email not provided"})
+  }
+  if(!emailValidator.validate(req.body.email)){
+        return res.status(400).send({message: 'Invalid email'});
+   }
+  if(!schema.validate(req.body.password)){
+    
+       return res.status(400).send({ message : schema.validate(req.body.password,{details:true})});
+   }
     
     userRepository.update(req.params.id, {
         username: req.body.username,
@@ -179,9 +230,9 @@ exports.removeRole= (req, res, next)=>{
   })
     .then(user => {  
 
-      if (req.body.roles) {
+      if (req.body.Roles) {
         //get the list of roles from the roles to be removed
-        roleRepository.getListRole(req.body.roles)
+        roleRepository.getListRole(req.body.Roles)
         .then(roles => {
           user.removeRoles(roles).then(() => {
             res.send({ message: "Role was removed successfully!" });
@@ -205,9 +256,9 @@ exports.addRole= (req, res, next)=>{
   })
     .then(user => {  
 
-      if (req.body.roles) {
+      if (req.body.Roles) {
         //get the list of roles from the roles to be removed
-        roleRepository.getListRole(req.body.roles)
+        roleRepository.getListRole(req.body.Roles)
         .then(roles => {
           //the setRoles function replace the whole list, while addRoles just add to the list
           user.addRoles(roles).then(() => {

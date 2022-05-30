@@ -1,15 +1,23 @@
 let db = require("../models/dbc").get()
-
+const Op = db.Sequelize.Op;
 
 exports.getAll =()=>{
     return db.Member.findAll({ include:[{
         model : db.Quartier, attributes:['quartier'] },{
-            model : db.Competence, attributes:['competence']  }]})
+            model : db.Competence, attributes:['competence']  },
+        {
+            model:db.Service, attributes:['service','description']
+        }]})
             
 }
 
 exports.getOne=(id)=>{
-    return db.Member.findByPk(id) 
+    return db.Member.findByPk(id, { include:[{
+        model : db.Quartier, attributes:['quartier'] },{
+            model : db.Competence, attributes:['competence']  },
+        {
+            model:db.Service, attributes:['service']
+        }]}) 
 }
 
 exports.create= (quartier)=>{
@@ -30,11 +38,15 @@ exports.getOneByName=(label) => {
         }
       })
 }
-// exports.addCompetenceToMember= ()=>{
-
-//     return db.Member.create({
-//         competences:[{
-//             competence
-//         }]
-//     })
-// }
+exports.findOne=(label) => {
+    return db.Member.findOne(label)
+}
+exports.getListMember=(members)=>{ 
+    return db.Member.findAll({
+        where: {
+          name: {
+            [Op.or]: members 
+          }
+        }
+      })
+}

@@ -1,8 +1,36 @@
 const memberRepository = require("../repository/member-repository")
 const quartierRepository= require("../repository/quartier-repository")
 const competenceRepository= require("../repository/competence-repository")
-
+const memberCompetenceRepository= require("../repository/memberCompetence-repository")
+let emailValidator= require("email-validator");
 exports.create = (req, res) => {
+  if(!req.body.name ){
+    return res.status(400).send({ message: "name not provided." });
+  }
+  if (req.body.name > limitString(req.body.name, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if (req.body.surname > limitString(req.body.surname, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if(!req.body.email){
+    return res.status(404).send({ message:"email not provided"})
+  }
+  if (req.body.email > limitString(req.body.email, 100)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+  }
+  if(!emailValidator.validate(req.body.email)){
+    return res.status(400).send({message: 'Invalid email'});
+}
+if (req.body.phone > limitString(req.body.phone, 100)){
+  return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+}
+if (req.body.rue > limitString(req.body.rue, 100)){
+  return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+}
+if(isNaN(req.body.numero)){
+  return res.status(404).send({ message:"Numero should be a number!!! Not a string"})
+}
   // Save User to Database
   memberRepository.create({
     name: req.body.name,
@@ -124,6 +152,33 @@ exports.insert= (req, res, next)=>{
 
 exports.update= (req, res, next)=>{
    
+  if(!req.body.name ){
+    return res.status(400).send({ message: "name not provided." });
+  }
+  if (req.body.name > limitString(req.body.name, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if (req.body.surname > limitString(req.body.surname, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if(!req.body.email){
+    return res.status(404).send({ message:"email not provided"})
+  }
+  if (req.body.email > limitString(req.body.email, 100)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+  }
+  if(!emailValidator.validate(req.body.email)){
+    return res.status(400).send({message: 'Invalid email'});
+}
+if (req.body.phone > limitString(req.body.phone, 100)){
+  return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+}
+if (req.body.rue > limitString(req.body.rue, 100)){
+  return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
+}
+if(isNaN(req.body.numero)){
+  return res.status(404).send({ message:"Numero should be a number!!! Not a string"})
+}
     memberRepository.update(req.params.id, {
         name: req.body.name,
         surname: req.body.surname,
@@ -131,28 +186,11 @@ exports.update= (req, res, next)=>{
         phone: req.body.phone,
         rue: req.body.rue,
         numero: req.body.numero,
-        QuartierId: quartierRepository.findOne({where :{ quartier: req.body.QuartierId}})
-                              .then((quartier)=>{
-                                return quartier.id
-                              })
+        QuartierId: req.body.QuartierId
         
       })
       .then((data)=>{     
-            if (req.body.QuartierId) {
-              quartierRepository.findOne({
-                where: {
-                  quartier: req.body.QuartierId
-                }
-              })
-                .then((quartier) => {  
-                  
-                   data.QuartierId =  quartier.id 
-                   //data.setQuartier(quartier)  
-                   console.log(data.QuartierId)
-                })
-                
-            }
-          
+            
             if (data) {  
                 return res.status(200).send({ message: "User updated successful." });
               } 
@@ -174,23 +212,23 @@ exports.delete = (req, res, next)=>{
 }
 
 exports.removeCompetence= (req, res, next)=>{
-  userRepository.findOne({
+  memberRepository.findOne({
     where: {
-      username: req.body.username
-    }
-  })
-    .then(user => {  
+      name: req.body.name
+    } 
+  }) 
+    .then(member => {   
 
-      if (req.body.roles) {
+      if (req.body.Competences) {
         //get the list of roles from the roles to be removed
-        roleRepository.getListRole(req.body.roles)
-        .then(roles => {
-          user.removeRoles(roles).then(() => {
-            res.send({ message: "Role was removed successfully!" });
+        competenceRepository.getListCompetence(req.body.Competences)
+        .then(competences => {
+          member.removeCompetences(competences).then(() => {
+            res.send({ message: "Competence was removed successfully!" });
           });
         });
       } else {
-          res.send({ message: "Role was not found !" });
+          res.send({ message: "Competence was not found !" });
       
       }
     })
@@ -200,28 +238,48 @@ exports.removeCompetence= (req, res, next)=>{
 }
 
 exports.addCompetence= (req, res, next)=>{
-  userRepository.findOne({
+  memberRepository.findOne({
     where: {
-      username: req.body.username
+      name: req.body.name
     }
   })
-    .then(user => {  
+    .then(member => {  
 
-      if (req.body.roles) {
+      if (req.body.Competences) {
         //get the list of roles from the roles to be removed
-        roleRepository.getListRole(req.body.roles)
-        .then(roles => {
+        competenceRepository.getListCompetence(req.body.Competences)
+        .then(competences => {
           //the setRoles function replace the whole list, while addRoles just add to the list
-          user.addRoles(roles).then(() => {
-            res.send({ message: "Role was added successfully!" });
+          member.addCompetences(competences).then(() => {
+            res.send({ message: "Competence was added to member successfully!" });
           });
         });
       } else {
-          res.send({ message: "Role was not found !" });
+          res.send({ message: "Competence was not found !" });
       
       }
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-};
+}
+
+exports.addCompetenceDetails= (req, res, next)=>{
+   
+  memberCompetenceRepository.update(req.body.MemberId, req.body.CompetenceId,  {
+      jour: req.body.jour,
+      heureDebut: req.body.heureDebut,
+      heureFin: req.body.heureFin,
+      niveauCompetence: req.body.niveauCompetence  
+    })
+    .then((data)=>{     
+          
+          if (data) {  
+              return res.status(200).send({ message: "detail competence updated successful." });
+            } 
+        })
+    .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
+}
+;

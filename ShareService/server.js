@@ -33,7 +33,10 @@ const memberRouter = require("./routers/member.router")
 app.use("/members", memberRouter)
 
 const quartierRouter = require("./routers/quartier.router")
-app.use("/quartier", quartierRouter) 
+app.use("/quartiers", quartierRouter) 
+
+const serviceRouter = require("./routers/service.router")
+app.use("/services", serviceRouter) 
 
 app.all("*", (req, res, next)=>{
     console.log("Attention please the route not found !!!!")

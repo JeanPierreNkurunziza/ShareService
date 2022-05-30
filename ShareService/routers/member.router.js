@@ -12,6 +12,7 @@ router.post("/removeCompetence", memberController.removeCompetence)
 router.patch("/:id", memberController.update) 
 router.post("/addCompetence", memberController.addCompetence) 
 router.delete("/:id", memberController.delete)
+router.post("/addCompetenceDetails", memberController.addCompetenceDetails) 
 
 
 module.exports= router

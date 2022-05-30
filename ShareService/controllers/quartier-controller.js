@@ -1,4 +1,6 @@
-const quartierRepository = require("../repository/quartier-repository")
+const quartierRepository = require("../repository/quartier-repository");
+const { limitString } = require("./limitString-controller");
+
 
 exports.getAll = (req, res, next)=>{
     quartierRepository.getAll()
@@ -42,6 +44,9 @@ exports.getUserId=(req, res, next)=>{
   if(!req.body.quartier){
     return res.status(404).send({ message: "quartier not provided." });
   }
+  if(isNaN(req.body.codePostale)){
+    return res.status(404).send({ message:"the number required not string"})
+  }
   quartierRepository.getQuartierId(req.body.quartier)
   .then((data)=>{
     if (!data) {
@@ -55,6 +60,18 @@ exports.getUserId=(req, res, next)=>{
 }
 
 exports.create= (req, res, next)=>{
+  if(!req.body.quartier ){
+    return res.status(404).send({ message: "quartier not provided." });
+  }
+  if (req.body.quartier > limitString(req.body.quartier, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if(isNaN(req.body.codePostale)){
+    return res.status(404).send({ message:"Code Postale should be a number!!! Not a string"})
+  }
+  if (req.body.localite > limitString(req.body.localite, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
     quartierRepository.create(
         {
             quartier: req.body.quartier,
@@ -70,6 +87,18 @@ exports.create= (req, res, next)=>{
 }
 
 exports.update= (req, res, next)=>{
+  if(!req.body.quartier ){
+    return res.status(404).send({ message: "quartier not provided." });
+  }
+  if (req.body.quartier > limitString(req.body.quartier, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
+  if(isNaN(req.body.codePostale)){
+    return res.status(404).send({ message:"Code Postale should be a number!!! Not a string"})
+  }
+  if (req.body.localite > limitString(req.body.localite, 50)){
+    return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
+  }
     
     quartierRepository.update(req.params.id, {
         quartier: req.body.quartier,

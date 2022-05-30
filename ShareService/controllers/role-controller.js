@@ -17,6 +17,14 @@ exports.getOne = (req, res, next)=>{
 }
 
 exports.create= (req, res, next)=>{
+    if(!req.body.role ){
+        return res.status(400).send({ message: "Role not provided." });
+      }
+     
+      if (req.body.role > limitString(req.body.role, 10)){
+        return res.status(404).send({ message: "You excedeed the number of the characters (10) required. " });
+      }
+     
     roleRepository.create(req.body)
         .then((data)=>{
             res.json(data)
@@ -29,3 +37,26 @@ exports.findOne = (req, res, next)=>{
         res.json(data)
     })
 }
+exports.update= (req, res, next)=>{
+    if(!req.body.role ){
+      return res.status(400).send({ message: "Role not provided." });
+    }
+   
+    if (req.body.role > limitString(req.body.role, 10)){
+      return res.status(404).send({ message: "You excedeed the number of the characters (10) required. " });
+    }
+   
+      competenceRepository.update(req.params.id, {
+          role: req.body.role,
+               
+        })
+        .then((data)=>{     
+              
+              if (data) {  
+                  return res.status(200).send({ message: "Role updated successful." });
+                } 
+            })
+        .catch(err => {
+              res.status(500).send({ message: err.message });
+            });
+  }

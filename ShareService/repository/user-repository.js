@@ -12,7 +12,7 @@ exports.getAll =()=>{
             through: {
               attributes: []
             }
-         }]
+         },{ model: db.Service, attributes:['service','description'] }]
         })
             
 }
