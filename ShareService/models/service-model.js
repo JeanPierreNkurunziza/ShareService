@@ -9,7 +9,11 @@ const serviceModel = (sequelize, DataTypes) => {
             allowNull: true
         },
         image: {
+<<<<<<< HEAD
             type: DataTypes.STRING,
+=======
+            type: DataTypes.TEXT('long'),
+>>>>>>> 36639e1 (init)
             allowNull: true
         }
     },

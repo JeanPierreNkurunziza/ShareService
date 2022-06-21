@@ -19,7 +19,11 @@ exports.update= (id, quartier)=>{
     return db.Quartier.update(quartier, {where : {id: id}})
 }
 exports.delete = (id)=>{
+<<<<<<< HEAD
     return db.Quartier.destroy({ wherre : {id : id}} )
+=======
+    return db.Quartier.destroy({ wherre : {id : id}} ) 
+>>>>>>> 36639e1 (init)
 }
 
 exports.getOneByName=(quartier) => {

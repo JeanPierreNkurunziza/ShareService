@@ -1,11 +1,33 @@
+<<<<<<< HEAD
+=======
+const memberCompetenceModel = require("../models/memberCompetence-model");
+
+>>>>>>> 36639e1 (init)
 let db = require("../models/dbc").get()
 const Op = db.Sequelize.Op;
 
 
 exports.getAll =()=>{
+<<<<<<< HEAD
     return db.Competence.findAll()
             
 }
+=======
+    return db.Competence.findAll({ 
+      include: {
+        model: db.MemberCompetence,
+        include: { model : db.Member, attributes:['name']}
+      }      
+        })         
+}
+// exports.getAll =()=>{
+//     return db.Competence.findAll({ include:[
+//         { model : db.Member, include:{model: db.Competence, 
+//             attributes:['competence']}  }
+//     ]})
+            
+// }
+>>>>>>> 36639e1 (init)
 
 exports.getOne=(id)=>{
     return db.Competence.findByPk(id)
@@ -19,7 +41,11 @@ exports.update= (id, competence)=>{
     return db.Competence.update(competence, {where : {id: id}})
 }
 exports.delete = (id)=>{
+<<<<<<< HEAD
     return db.Competence.destroy({ wherre : {id : id}} )
+=======
+    return db.Competence.destroy({ where : {id : id}} )
+>>>>>>> 36639e1 (init)
 }
 
 exports.getOneByName=(label) => {

@@ -31,6 +31,13 @@ const memberModel = (sequelize, DataTypes) => {
             allowNull: false,
             
         },
+<<<<<<< HEAD
+=======
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
+>>>>>>> 36639e1 (init)
     },
     {
         timestamps: false

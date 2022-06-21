@@ -37,6 +37,7 @@ module.exports = {
                 ServiceDemande: serviceDemandeModel(sequelize, DataTypes) 
                 
             }
+<<<<<<< HEAD
             
             dbConnector.Member.belongsToMany(dbConnector.Competence, {through: 'MemberCompetence'},{ timestamps: false})
             dbConnector.Competence.belongsToMany(dbConnector.Member, {through : 'MemberCompetence'},{ timestamps: false}) 
@@ -44,6 +45,38 @@ module.exports = {
             dbConnector.Role.belongsToMany(dbConnector.User, {through : 'UserRole'},{ timestamps: false}) 
             dbConnector.Member.belongsToMany(dbConnector.Service, {through: 'ServiceDemande'},{ timestamps: false})
             dbConnector.Service.belongsToMany(dbConnector.Member, {through : 'ServiceDemande'},{ timestamps: false}) 
+=======
+            // the Super Many-to-Many relationship member et competence
+            // Setup a One-to-Many relationship between Member and membercompetence
+            dbConnector.Member.hasMany(dbConnector.MemberCompetence);
+            dbConnector.MemberCompetence.belongsTo(dbConnector.Member);
+
+            // Also setup a One-to-Many relationship between competence and memebercompetence
+            dbConnector.Competence.hasMany(dbConnector.MemberCompetence);
+            dbConnector.MemberCompetence.belongsTo(dbConnector.Competence);  
+
+            dbConnector.Competence.belongsToMany(dbConnector.Member, {through : 'MemberCompetence'}) 
+            dbConnector.Member.belongsToMany(dbConnector.Competence, {through: 'MemberCompetence'})
+            
+            //  Many-to-Many relationship User and Role
+            dbConnector.User.belongsToMany(dbConnector.Role, {through: 'UserRole'},{ timestamps: false})
+            dbConnector.Role.belongsToMany(dbConnector.User, {through : 'UserRole'},{ timestamps: false})
+            
+            // using sequelize the Super Many-to-Many relationship service et member
+             // Setup a One-to-Many relationship between Member and ServiceDemande
+             dbConnector.Member.hasMany(dbConnector.ServiceDemande);
+             dbConnector.ServiceDemande.belongsTo(dbConnector.Member);
+ 
+             // Also setup a One-to-Many relationship between service and ServiceDemande
+             dbConnector.Service.hasMany(dbConnector.ServiceDemande);
+             dbConnector.ServiceDemande.belongsTo(dbConnector.Service);
+          
+            //ajouter les relations suivantes pour beneficier super many to many
+            dbConnector.Member.belongsToMany(dbConnector.Service, {through: 'ServiceDemande'})
+            dbConnector.Service.belongsToMany(dbConnector.Member, {through : 'ServiceDemande'}) 
+            
+
+>>>>>>> 36639e1 (init)
             dbConnector.User.hasMany(dbConnector.Service, { allowNull: false  })
             dbConnector.Service.belongsTo(dbConnector.User)
             

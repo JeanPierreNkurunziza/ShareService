@@ -1,6 +1,7 @@
 let db = require("../models/dbc").get()
 const Op = db.Sequelize.Op;
 
+<<<<<<< HEAD
 exports.getAll =()=>{
     return db.Member.findAll({ include:[{
         model : db.Quartier, attributes:['quartier'] },{
@@ -8,16 +9,42 @@ exports.getAll =()=>{
         {
             model:db.Service, attributes:['service','description']
         }]})
+=======
+// exports.getAll =()=>{
+//     return db.Member.findAll({ include:[
+//         { model : db.Quartier, attributes:['quartier'] },
+//         { model : db.Competence, attributes:['competence']  },
+//         { model:db.Service, attributes:['service','description'] }
+//     ]})
+            
+// }
+exports.getAll =()=>{
+    return db.Member.findAll({ include:[
+        { model : db.Quartier, attributes:['quartier','codePostale','localite'] },
+        { model : db.MemberCompetence, include:{model: db.Competence, 
+            attributes:['competence']}  },
+        { model:db.Service, include:{model:db.User}}
+    ]})
+>>>>>>> 36639e1 (init)
             
 }
 
 exports.getOne=(id)=>{
+<<<<<<< HEAD
     return db.Member.findByPk(id, { include:[{
         model : db.Quartier, attributes:['quartier'] },{
             model : db.Competence, attributes:['competence']  },
         {
             model:db.Service, attributes:['service']
         }]}) 
+=======
+    return db.Member.findByPk(id, { include:[
+        { model : db.Quartier, attributes:['quartier','codePostale','localite'] },
+        { model : db.MemberCompetence, include:{model: db.Competence, 
+            attributes:['competence']}  },
+        { model:db.Service, include:{model:db.User}}
+    ]}) 
+>>>>>>> 36639e1 (init)
 }
 
 exports.create= (quartier)=>{

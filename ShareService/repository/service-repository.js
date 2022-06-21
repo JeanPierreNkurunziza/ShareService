@@ -2,6 +2,7 @@ let db = require("../models/dbc").get()
 const sequelize = require("sequelize")
 
 exports.getAll =()=>{
+<<<<<<< HEAD
     return db.Service.findAll({ include:[{
         model : db.User, attributes:['username'] },{
             model : db.Member, attributes:['name']}
@@ -12,6 +13,30 @@ exports.getAll =()=>{
 
 exports.getOne=(id)=>{
     return db.Service.findByPk(id)
+=======
+    return db.Service.findAll(
+            { include:
+                [
+                    { model : db.User, attributes:['username','email','image'] },
+                    { model : db.ServiceDemande, include:{model: db.Member, 
+                        attributes:['id','name', 'surname','email','phone']}  }
+                ]
+            }
+        )
+ 
+}
+
+exports.getOne=(id)=>{
+    return db.Service.findByPk(id, 
+        { include:
+            [
+                { model : db.User, attributes:['username','email','image'] },
+                { model : db.ServiceDemande, include:{model: db.Member, 
+                    attributes:['id','name', 'surname','email','phone']}  }
+            ]
+        }
+        )
+>>>>>>> 36639e1 (init)
 }
 
 exports.create= (service)=>{

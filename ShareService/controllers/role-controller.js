@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const roleRepository = require("../repository/role-repository")
+=======
+const roleRepository = require("../repository/role-repository");
+const { limitString } = require("./limitString-controller")
+>>>>>>> 36639e1 (init)
 
 exports.getAll = (req, res, next)=>{
     roleRepository.getAll()
@@ -38,15 +43,23 @@ exports.findOne = (req, res, next)=>{
     })
 }
 exports.update= (req, res, next)=>{
+<<<<<<< HEAD
     if(!req.body.role ){
       return res.status(400).send({ message: "Role not provided." });
     }
+=======
+ 
+>>>>>>> 36639e1 (init)
    
     if (req.body.role > limitString(req.body.role, 10)){
       return res.status(404).send({ message: "You excedeed the number of the characters (10) required. " });
     }
+<<<<<<< HEAD
    
       competenceRepository.update(req.params.id, {
+=======
+      roleRepository.update(req.params.id, {
+>>>>>>> 36639e1 (init)
           role: req.body.role,
                
         })
@@ -59,4 +72,18 @@ exports.update= (req, res, next)=>{
         .catch(err => {
               res.status(500).send({ message: err.message });
             });
+<<<<<<< HEAD
+=======
+  }
+  exports.delete = (req, res, next)=>{
+    roleRepository.delete(req.params.id)
+    .then(()=>{
+      res.status(200).send({message: "Role deleted successful"})
+      res.json()
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+     
+>>>>>>> 36639e1 (init)
   }

@@ -2,6 +2,12 @@
 const userRepository = require("../repository/user-repository")
 const roleRepository= require("../repository/role-repository")
 const config = require("../config/auth.config");
+<<<<<<< HEAD
+=======
+const { limitString } = require("./limitString-controller")
+const fs = require("fs");
+const uuid = require('uuid');
+>>>>>>> 36639e1 (init)
 let passwordValidator = require("password-validator");
 let schema = new passwordValidator();
 let emailValidator= require("email-validator");
@@ -37,12 +43,26 @@ exports.signup = (req, res) => {
     
        return res.status(400).send({ message : schema.validate(req.body.password,{details:true})});
    } 
+<<<<<<< HEAD
+=======
+  if(req.body.image) {
+    const imageName = 'assets/users/' + uuid.v1(); 
+    const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+    fs.writeFile(imageName, base64, 'base64', err => {});
+    req.body.image = imageName;
+  }
+>>>>>>> 36639e1 (init)
   
   // Save User to Database
   userRepository.create({
     username: req.body.username,
     email: req.body.email,
+<<<<<<< HEAD
     password: bcrypt.hashSync(req.body.password, 8)
+=======
+    password: bcrypt.hashSync(req.body.password, 8),
+    image:req.body.image
+>>>>>>> 36639e1 (init)
   })
     .then(user => {
       if (req.body.Roles) {
@@ -96,6 +116,10 @@ exports.signin = (req, res) => {
           id: user.id,
           username: user.username,
           email: user.email,
+<<<<<<< HEAD
+=======
+          image:user.image,
+>>>>>>> 36639e1 (init)
           roles: authorities,
           accessToken: token
         });
@@ -165,7 +189,12 @@ exports.insert= (req, res, next)=>{
         {
             name: req.body.username,
             email: req.body.email,
+<<<<<<< HEAD
             password: bcrypt.hashSync(req.body.password, 8)
+=======
+            password: bcrypt.hashSync(req.body.password, 8),
+            image:req.body.image
+>>>>>>> 36639e1 (init)
           })
         .then((data)=>{
             res.json(data)
@@ -176,18 +205,26 @@ exports.insert= (req, res, next)=>{
 }
 
 exports.update= (req, res, next)=>{
+<<<<<<< HEAD
   if(!req.body.username ){
     return res.status(400).send({ message: "Username not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
   if (req.body.username > limitString(req.body.username, 50)){
     return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
   }
   if (req.body.email > limitString(req.body.email, 100)){
     return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
   }
+<<<<<<< HEAD
   if(!req.body.email){
     return res.status(404).send({ message:"email not provided"})
   }
+=======
+  
+>>>>>>> 36639e1 (init)
   if(!emailValidator.validate(req.body.email)){
         return res.status(400).send({message: 'Invalid email'});
    }
@@ -195,11 +232,26 @@ exports.update= (req, res, next)=>{
     
        return res.status(400).send({ message : schema.validate(req.body.password,{details:true})});
    }
+<<<<<<< HEAD
     
     userRepository.update(req.params.id, {
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
+=======
+   
+   if(req.body.image) {
+    const imageName = 'assets/users/' + uuid.v1(); 
+    const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+    fs.writeFile(imageName, base64, 'base64', err => {});
+    req.body.image = imageName;
+  } 
+    userRepository.update(req.params.id, {
+        username: req.body.username,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8),
+        image:req.body.image
+>>>>>>> 36639e1 (init)
       })
       .then((data)=>{
               if (data) {
@@ -207,7 +259,12 @@ exports.update= (req, res, next)=>{
               }
           })
       .catch(err => {
+<<<<<<< HEAD
             res.status(500).send({ message: err.message });
+=======
+     
+            res.status(600).send({ message: err.message });
+>>>>>>> 36639e1 (init)
           });
 }
 exports.delete = (req, res, next)=>{

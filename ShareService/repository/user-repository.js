@@ -37,6 +37,10 @@ exports.create= (user)=>{
 }
 
 exports.update= (id, user)=>{
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 36639e1 (init)
     return db.User.update(user, {where : {id: id}})
 }
 exports.delete = (id)=>{

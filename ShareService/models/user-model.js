@@ -18,6 +18,13 @@ const userModel = (sequelize, DataTypes) => {
             validate: {
                 min: 6
             }
+<<<<<<< HEAD
+=======
+        },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true
+>>>>>>> 36639e1 (init)
         }
     },
     {

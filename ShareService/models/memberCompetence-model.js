@@ -1,11 +1,20 @@
 const memberCompetenceModel = (sequelize, DataTypes) => {
     const MemberCompetence = sequelize.define("MemberCompetence", {
+<<<<<<< HEAD
         // id: {
         //     type: DataTypes.INTEGER,
         //     primaryKey:true,
         //     autoIncrement:true,
         //     allowNull: false
         // },
+=======
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey:true,
+            autoIncrement:true,
+            allowNull: false
+        },
+>>>>>>> 36639e1 (init)
         jour: {
             type: DataTypes.STRING(10),
             allowNull: true

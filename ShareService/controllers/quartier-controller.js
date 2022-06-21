@@ -32,7 +32,11 @@ exports.findOne = (req, res, next)=>{
     });
 }
 exports.findByName = (req, res, next)=>{
+<<<<<<< HEAD
   quartierRepository.findByName(req.body.quartier)
+=======
+  quartierRepository.getOneByName(req.body.quartier)
+>>>>>>> 36639e1 (init)
   .then((data)=>{
       res.json(data)
   })
@@ -40,7 +44,11 @@ exports.findByName = (req, res, next)=>{
     res.status(500).send({ message: err.message });
   });
 }
+<<<<<<< HEAD
 exports.getUserId=(req, res, next)=>{
+=======
+exports.getQuartierIdentifiant=(req, res, next)=>{
+>>>>>>> 36639e1 (init)
   if(!req.body.quartier){
     return res.status(404).send({ message: "quartier not provided." });
   }
@@ -87,9 +95,13 @@ exports.create= (req, res, next)=>{
 }
 
 exports.update= (req, res, next)=>{
+<<<<<<< HEAD
   if(!req.body.quartier ){
     return res.status(404).send({ message: "quartier not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
   if (req.body.quartier > limitString(req.body.quartier, 50)){
     return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
   }
@@ -129,6 +141,14 @@ exports.delete = (req, res, next)=>{
 exports.getQuartierId=(req, res, next)=>{
   quartierRepository.getQuartierId(req.body.quartier)
   .then((data)=>{
+<<<<<<< HEAD
     res.json(data)
   })
+=======
+    res.json(data.id)
+  })
+  .catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+>>>>>>> 36639e1 (init)
 }

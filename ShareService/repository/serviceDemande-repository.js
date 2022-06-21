@@ -8,4 +8,14 @@ exports.update= (memberId, serviceId, serviceDemande)=>{
     return db.sequelize.model("ServiceDemande").update(serviceDemande, 
         { where : {[Op.and]: [{ MemberId: memberId}, { ServiceId: serviceId}]} 
                 
+<<<<<<< HEAD
 })}
+=======
+})}
+
+exports.update= (id, memberId, serviceId, serviceDemande)=>{
+    return db.sequelize.model("ServiceDemande").update(serviceDemande, 
+        { where : {[Op.and]: [{id:id},{ MemberId: memberId}, { ServiceId: serviceId}]} 
+               
+})}
+>>>>>>> 36639e1 (init)

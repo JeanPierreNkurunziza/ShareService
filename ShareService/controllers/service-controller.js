@@ -2,6 +2,12 @@ const memberRepository = require("../repository/member-repository")
 const userRepository= require("../repository/user-repository")
 const serviceRepository=require("../repository/service-repository") 
 const serviceDemandeRepository=require("../repository/serviceDemande-repository")
+<<<<<<< HEAD
+=======
+const { limitString } = require("./limitString-controller")
+const fs = require("fs");
+const uuid = require('uuid');
+>>>>>>> 36639e1 (init)
 
 exports.create = (req, res) => {
   if(!req.body.service ){
@@ -16,10 +22,24 @@ exports.create = (req, res) => {
   if (req.body.description > limitString(req.body.description, 250)){
     return res.status(404).send({ message: "You excedeed the number of the characters (250) required. " });
   }
+<<<<<<< HEAD
   // Save User to Database
   serviceRepository.create({
     service: req.body.service,
     description: req.body.description
+=======
+  if(req.body.image) {
+    const imageName = 'assets/services/' + uuid.v1(); 
+    const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+    fs.writeFile(imageName, base64, 'base64', err => {});
+    req.body.image = imageName;
+  }
+  // Save User to Database
+  serviceRepository.create({
+    service: req.body.service,
+    description: req.body.description,
+    image:req.body.image
+>>>>>>> 36639e1 (init)
     
   })
   .then(service =>{
@@ -48,7 +68,11 @@ exports.create = (req, res) => {
           res.send({ message: "Member was registered successfully!" });
         });
       }
+<<<<<<< HEAD
     
+=======
+     
+>>>>>>> 36639e1 (init)
     })
         
      .catch(err => {
@@ -112,18 +136,31 @@ exports.getMemberId=(req, res, next)=>{
 }
 
 exports.update= (req, res, next)=>{
+<<<<<<< HEAD
   if(!req.body.service ){
     return res.status(400).send({ message: "Service not provided." });
   }
   if(!req.body.description ){
     return res.status(400).send({ message: "Description not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
   if (req.body.service > limitString(req.body.service, 100)){
     return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
   }
   if (req.body.description > limitString(req.body.description, 250)){
     return res.status(404).send({ message: "You excedeed the number of the characters (250) required. " });
   }
+<<<<<<< HEAD
+=======
+  if(req.body.image) {
+    const imageName = 'assets/services/' + uuid.v1(); 
+    const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+    fs.writeFile(imageName, base64, 'base64', err => {});
+    req.body.image = imageName;
+  }
+>>>>>>> 36639e1 (init)
     serviceRepository.update(req.params.id, {
         service: req.body.service,
         description: req.body.description,
@@ -180,11 +217,15 @@ exports.removeMember= (req, res, next)=>{
 }
 
 exports.addMember= (req, res, next)=>{
+<<<<<<< HEAD
   // serviceRepository.findOne({
   //   where: {
   //     service: req.body.service
   //   }
   // })
+=======
+ 
+>>>>>>> 36639e1 (init)
   serviceRepository.getOne(req.body.id)
     .then(service => {  
 
@@ -209,7 +250,11 @@ exports.addMember= (req, res, next)=>{
 
 exports.addServiceDemandeDetails= (req, res, next)=>{
    
+<<<<<<< HEAD
   serviceDemandeRepository.update(req.body.MemberId, req.body.ServiceId,  {
+=======
+  serviceDemandeRepository.update(req.body.id, req.body.MemberId, req.body.ServiceId,  {
+>>>>>>> 36639e1 (init)
       jourHeurePropose: req.body.jourHeurePropose
       
     })
@@ -223,4 +268,8 @@ exports.addServiceDemandeDetails= (req, res, next)=>{
           res.status(500).send({ message: err.message });
         });
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 36639e1 (init)
 ;

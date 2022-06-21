@@ -1,7 +1,16 @@
 const memberRepository = require("../repository/member-repository")
 const quartierRepository= require("../repository/quartier-repository")
+<<<<<<< HEAD
 const competenceRepository= require("../repository/competence-repository")
 const memberCompetenceRepository= require("../repository/memberCompetence-repository")
+=======
+const quartierController=require("./quartier-controller")
+const competenceRepository= require("../repository/competence-repository")
+const memberCompetenceRepository= require("../repository/memberCompetence-repository")
+const { limitString } = require("./limitString-controller")
+const fs = require("fs");
+const uuid = require('uuid');
+>>>>>>> 36639e1 (init)
 let emailValidator= require("email-validator");
 exports.create = (req, res) => {
   if(!req.body.name ){
@@ -28,8 +37,19 @@ if (req.body.phone > limitString(req.body.phone, 100)){
 if (req.body.rue > limitString(req.body.rue, 100)){
   return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
 }
+<<<<<<< HEAD
 if(isNaN(req.body.numero)){
   return res.status(404).send({ message:"Numero should be a number!!! Not a string"})
+=======
+if(req.body.numero > limitString(req.body.numero, 10)){
+  return res.status(404).send({ message:"You excedeed the number of 10 charcters"})
+}
+if(req.body.image) {
+  const imageName = 'assets/members/' + uuid.v1(); 
+  const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+  fs.writeFile(imageName, base64, 'base64', err => {});
+  req.body.image = imageName;
+>>>>>>> 36639e1 (init)
 }
   // Save User to Database
   memberRepository.create({
@@ -39,6 +59,10 @@ if(isNaN(req.body.numero)){
     phone: req.body.phone,
     rue: req.body.rue,
     numero: req.body.numero,
+<<<<<<< HEAD
+=======
+    image:req.body.image
+>>>>>>> 36639e1 (init)
     
    
   })
@@ -51,13 +75,22 @@ if(isNaN(req.body.numero)){
           member.setQuartier(quartier)
         });
       } else  {
+<<<<<<< HEAD
         // set quartier par defaut = 1
         member.setQuartier([4])
+=======
+        // set quartier par defaut = 5 , undefined
+        member.setQuartier([5])
+>>>>>>> 36639e1 (init)
       }  
     if (req.body.Competences) {
         //get the list of roles from the competence
         competenceRepository.getListCompetence(req.body.Competences)
         .then(competences => {
+<<<<<<< HEAD
+=======
+          
+>>>>>>> 36639e1 (init)
           member.setCompetences(competences).then(() => {
             res.send({ message: "Member was registered successfully!" });
           });
@@ -69,7 +102,11 @@ if(isNaN(req.body.numero)){
         });
       }
     
+<<<<<<< HEAD
     })
+=======
+     })
+>>>>>>> 36639e1 (init)
         
      .catch(err => {
       res.status(500).send({ message: err.message });
@@ -151,19 +188,27 @@ exports.insert= (req, res, next)=>{
 }
 
 exports.update= (req, res, next)=>{
+<<<<<<< HEAD
    
   if(!req.body.name ){
     return res.status(400).send({ message: "name not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
   if (req.body.name > limitString(req.body.name, 50)){
     return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
   }
   if (req.body.surname > limitString(req.body.surname, 50)){
     return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
   }
+<<<<<<< HEAD
   if(!req.body.email){
     return res.status(404).send({ message:"email not provided"})
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
   if (req.body.email > limitString(req.body.email, 100)){
     return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
   }
@@ -176,9 +221,22 @@ if (req.body.phone > limitString(req.body.phone, 100)){
 if (req.body.rue > limitString(req.body.rue, 100)){
   return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
 }
+<<<<<<< HEAD
 if(isNaN(req.body.numero)){
   return res.status(404).send({ message:"Numero should be a number!!! Not a string"})
 }
+=======
+if(req.body.numero > limitString(req.body.numero, 10)){
+  return res.status(404).send({ message:"You excedeed the number of the characters (10) required. "})
+}
+if(req.body.image) {
+  const imageName = 'assets/members/' + uuid.v1(); 
+  const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+  fs.writeFile(imageName, base64, 'base64', err => {});
+  req.body.image = imageName;
+}
+
+>>>>>>> 36639e1 (init)
     memberRepository.update(req.params.id, {
         name: req.body.name,
         surname: req.body.surname,
@@ -186,6 +244,7 @@ if(isNaN(req.body.numero)){
         phone: req.body.phone,
         rue: req.body.rue,
         numero: req.body.numero,
+<<<<<<< HEAD
         QuartierId: req.body.QuartierId
         
       })
@@ -195,6 +254,19 @@ if(isNaN(req.body.numero)){
                 return res.status(200).send({ message: "User updated successful." });
               } 
           })
+=======
+        image:req.body.image,
+        QuartierId:req.body.QuartierId
+       
+        
+      })
+      .then((data)=>{     
+      
+        if(data){
+          return res.status(200).send({ message: "Member updated successful." });
+        }
+      })
+>>>>>>> 36639e1 (init)
       .catch(err => {
             res.status(500).send({ message: err.message });
           });
