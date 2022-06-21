@@ -32,11 +32,17 @@ const memberModel = (sequelize, DataTypes) => {
             
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 36639e1 (init)
         image: {
             type: DataTypes.STRING,
             allowNull: true
         }
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
     },
     {

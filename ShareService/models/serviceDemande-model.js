@@ -14,7 +14,13 @@ const serviceDemandeModel = (sequelize, DataTypes) => {
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         timestamps: false
+=======
+        timestamps: true,
+        createdAt: true, // don't add createdAt attribute
+        updatedAt: false,
+>>>>>>> 36639e1 (init)
 =======
         timestamps: true,
         createdAt: true, // don't add createdAt attribute

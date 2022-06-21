@@ -38,6 +38,7 @@ module.exports = {
                 
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             
             dbConnector.Member.belongsToMany(dbConnector.Competence, {through: 'MemberCompetence'},{ timestamps: false})
             dbConnector.Competence.belongsToMany(dbConnector.Member, {through : 'MemberCompetence'},{ timestamps: false}) 
@@ -46,6 +47,8 @@ module.exports = {
             dbConnector.Member.belongsToMany(dbConnector.Service, {through: 'ServiceDemande'},{ timestamps: false})
             dbConnector.Service.belongsToMany(dbConnector.Member, {through : 'ServiceDemande'},{ timestamps: false}) 
 =======
+=======
+>>>>>>> 36639e1 (init)
             // the Super Many-to-Many relationship member et competence
             // Setup a One-to-Many relationship between Member and membercompetence
             dbConnector.Member.hasMany(dbConnector.MemberCompetence);
@@ -76,6 +79,9 @@ module.exports = {
             dbConnector.Service.belongsToMany(dbConnector.Member, {through : 'ServiceDemande'}) 
             
 
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
             dbConnector.User.hasMany(dbConnector.Service, { allowNull: false  })
             dbConnector.Service.belongsTo(dbConnector.User)

@@ -9,8 +9,11 @@ exports.update= (memberId, serviceId, serviceDemande)=>{
         { where : {[Op.and]: [{ MemberId: memberId}, { ServiceId: serviceId}]} 
                 
 <<<<<<< HEAD
+<<<<<<< HEAD
 })}
 =======
+=======
+>>>>>>> 36639e1 (init)
 })}
 
 exports.update= (id, memberId, serviceId, serviceDemande)=>{
@@ -18,4 +21,7 @@ exports.update= (id, memberId, serviceId, serviceDemande)=>{
         { where : {[Op.and]: [{id:id},{ MemberId: memberId}, { ServiceId: serviceId}]} 
                
 })}
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)

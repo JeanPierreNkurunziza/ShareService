@@ -5,7 +5,11 @@ router.get("/", quartierController.getAll)
 router.get("/:id", quartierController.getOne)
 router.post("/", quartierController.create)
 <<<<<<< HEAD
+<<<<<<< HEAD
 router.post("/:getIdQuartier", quartierController.getUserId)
+=======
+router.post("/:getIdQuartier", quartierController.getQuartierId)
+>>>>>>> 36639e1 (init)
 =======
 router.post("/:getIdQuartier", quartierController.getQuartierId)
 >>>>>>> 36639e1 (init)

@@ -38,6 +38,10 @@ exports.create= (user)=>{
 
 exports.update= (id, user)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 36639e1 (init)
 =======
     
 >>>>>>> 36639e1 (init)

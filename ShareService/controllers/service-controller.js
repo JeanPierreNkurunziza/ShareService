@@ -3,6 +3,12 @@ const userRepository= require("../repository/user-repository")
 const serviceRepository=require("../repository/service-repository") 
 const serviceDemandeRepository=require("../repository/serviceDemande-repository")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const { limitString } = require("./limitString-controller")
+const fs = require("fs");
+const uuid = require('uuid');
+>>>>>>> 36639e1 (init)
 =======
 const { limitString } = require("./limitString-controller")
 const fs = require("fs");
@@ -23,11 +29,14 @@ exports.create = (req, res) => {
     return res.status(404).send({ message: "You excedeed the number of the characters (250) required. " });
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   // Save User to Database
   serviceRepository.create({
     service: req.body.service,
     description: req.body.description
 =======
+=======
+>>>>>>> 36639e1 (init)
   if(req.body.image) {
     const imageName = 'assets/services/' + uuid.v1(); 
     const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
@@ -39,6 +48,9 @@ exports.create = (req, res) => {
     service: req.body.service,
     description: req.body.description,
     image:req.body.image
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
     
   })
@@ -69,7 +81,11 @@ exports.create = (req, res) => {
         });
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+     
+>>>>>>> 36639e1 (init)
 =======
      
 >>>>>>> 36639e1 (init)
@@ -137,12 +153,16 @@ exports.getMemberId=(req, res, next)=>{
 
 exports.update= (req, res, next)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
   if(!req.body.service ){
     return res.status(400).send({ message: "Service not provided." });
   }
   if(!req.body.description ){
     return res.status(400).send({ message: "Description not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
 =======
  
 >>>>>>> 36639e1 (init)
@@ -153,13 +173,19 @@ exports.update= (req, res, next)=>{
     return res.status(404).send({ message: "You excedeed the number of the characters (250) required. " });
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 36639e1 (init)
   if(req.body.image) {
     const imageName = 'assets/services/' + uuid.v1(); 
     const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
     fs.writeFile(imageName, base64, 'base64', err => {});
     req.body.image = imageName;
   }
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
     serviceRepository.update(req.params.id, {
         service: req.body.service,
@@ -218,11 +244,15 @@ exports.removeMember= (req, res, next)=>{
 
 exports.addMember= (req, res, next)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
   // serviceRepository.findOne({
   //   where: {
   //     service: req.body.service
   //   }
   // })
+=======
+ 
+>>>>>>> 36639e1 (init)
 =======
  
 >>>>>>> 36639e1 (init)
@@ -251,7 +281,11 @@ exports.addMember= (req, res, next)=>{
 exports.addServiceDemandeDetails= (req, res, next)=>{
    
 <<<<<<< HEAD
+<<<<<<< HEAD
   serviceDemandeRepository.update(req.body.MemberId, req.body.ServiceId,  {
+=======
+  serviceDemandeRepository.update(req.body.id, req.body.MemberId, req.body.ServiceId,  {
+>>>>>>> 36639e1 (init)
 =======
   serviceDemandeRepository.update(req.body.id, req.body.MemberId, req.body.ServiceId,  {
 >>>>>>> 36639e1 (init)
@@ -269,6 +303,10 @@ exports.addServiceDemandeDetails= (req, res, next)=>{
         });
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 36639e1 (init)
 =======
 
 >>>>>>> 36639e1 (init)

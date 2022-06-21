@@ -3,6 +3,12 @@ const userRepository = require("../repository/user-repository")
 const roleRepository= require("../repository/role-repository")
 const config = require("../config/auth.config");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const { limitString } = require("./limitString-controller")
+const fs = require("fs");
+const uuid = require('uuid');
+>>>>>>> 36639e1 (init)
 =======
 const { limitString } = require("./limitString-controller")
 const fs = require("fs");
@@ -44,13 +50,19 @@ exports.signup = (req, res) => {
        return res.status(400).send({ message : schema.validate(req.body.password,{details:true})});
    } 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 36639e1 (init)
   if(req.body.image) {
     const imageName = 'assets/users/' + uuid.v1(); 
     const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
     fs.writeFile(imageName, base64, 'base64', err => {});
     req.body.image = imageName;
   }
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
   
   // Save User to Database
@@ -58,7 +70,12 @@ exports.signup = (req, res) => {
     username: req.body.username,
     email: req.body.email,
 <<<<<<< HEAD
+<<<<<<< HEAD
     password: bcrypt.hashSync(req.body.password, 8)
+=======
+    password: bcrypt.hashSync(req.body.password, 8),
+    image:req.body.image
+>>>>>>> 36639e1 (init)
 =======
     password: bcrypt.hashSync(req.body.password, 8),
     image:req.body.image
@@ -117,6 +134,10 @@ exports.signin = (req, res) => {
           username: user.username,
           email: user.email,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+          image:user.image,
+>>>>>>> 36639e1 (init)
 =======
           image:user.image,
 >>>>>>> 36639e1 (init)
@@ -190,7 +211,12 @@ exports.insert= (req, res, next)=>{
             name: req.body.username,
             email: req.body.email,
 <<<<<<< HEAD
+<<<<<<< HEAD
             password: bcrypt.hashSync(req.body.password, 8)
+=======
+            password: bcrypt.hashSync(req.body.password, 8),
+            image:req.body.image
+>>>>>>> 36639e1 (init)
 =======
             password: bcrypt.hashSync(req.body.password, 8),
             image:req.body.image
@@ -206,9 +232,13 @@ exports.insert= (req, res, next)=>{
 
 exports.update= (req, res, next)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
   if(!req.body.username ){
     return res.status(400).send({ message: "Username not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
 =======
  
 >>>>>>> 36639e1 (init)
@@ -219,9 +249,13 @@ exports.update= (req, res, next)=>{
     return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   if(!req.body.email){
     return res.status(404).send({ message:"email not provided"})
   }
+=======
+  
+>>>>>>> 36639e1 (init)
 =======
   
 >>>>>>> 36639e1 (init)
@@ -233,12 +267,15 @@ exports.update= (req, res, next)=>{
        return res.status(400).send({ message : schema.validate(req.body.password,{details:true})});
    }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     userRepository.update(req.params.id, {
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
 =======
+=======
+>>>>>>> 36639e1 (init)
    
    if(req.body.image) {
     const imageName = 'assets/users/' + uuid.v1(); 
@@ -251,6 +288,9 @@ exports.update= (req, res, next)=>{
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
         image:req.body.image
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
       })
       .then((data)=>{
@@ -260,7 +300,12 @@ exports.update= (req, res, next)=>{
           })
       .catch(err => {
 <<<<<<< HEAD
+<<<<<<< HEAD
             res.status(500).send({ message: err.message });
+=======
+     
+            res.status(600).send({ message: err.message });
+>>>>>>> 36639e1 (init)
 =======
      
             res.status(600).send({ message: err.message });

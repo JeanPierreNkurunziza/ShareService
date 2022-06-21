@@ -10,7 +10,11 @@ const serviceModel = (sequelize, DataTypes) => {
         },
         image: {
 <<<<<<< HEAD
+<<<<<<< HEAD
             type: DataTypes.STRING,
+=======
+            type: DataTypes.TEXT('long'),
+>>>>>>> 36639e1 (init)
 =======
             type: DataTypes.TEXT('long'),
 >>>>>>> 36639e1 (init)

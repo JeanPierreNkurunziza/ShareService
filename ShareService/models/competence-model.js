@@ -4,11 +4,17 @@ const competenceModel = (sequelize, DataTypes) => {
             type: DataTypes.STRING(20),
             allowNull: false
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 36639e1 (init)
         },
         image: {
             type: DataTypes.STRING,
             allowNull: true
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
         }
     },

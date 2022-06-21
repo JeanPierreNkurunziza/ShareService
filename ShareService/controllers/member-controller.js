@@ -1,15 +1,21 @@
 const memberRepository = require("../repository/member-repository")
 const quartierRepository= require("../repository/quartier-repository")
 <<<<<<< HEAD
+<<<<<<< HEAD
 const competenceRepository= require("../repository/competence-repository")
 const memberCompetenceRepository= require("../repository/memberCompetence-repository")
 =======
+=======
+>>>>>>> 36639e1 (init)
 const quartierController=require("./quartier-controller")
 const competenceRepository= require("../repository/competence-repository")
 const memberCompetenceRepository= require("../repository/memberCompetence-repository")
 const { limitString } = require("./limitString-controller")
 const fs = require("fs");
 const uuid = require('uuid');
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
 let emailValidator= require("email-validator");
 exports.create = (req, res) => {
@@ -38,9 +44,12 @@ if (req.body.rue > limitString(req.body.rue, 100)){
   return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 if(isNaN(req.body.numero)){
   return res.status(404).send({ message:"Numero should be a number!!! Not a string"})
 =======
+=======
+>>>>>>> 36639e1 (init)
 if(req.body.numero > limitString(req.body.numero, 10)){
   return res.status(404).send({ message:"You excedeed the number of 10 charcters"})
 }
@@ -49,6 +58,9 @@ if(req.body.image) {
   const base64 = req.body.image.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
   fs.writeFile(imageName, base64, 'base64', err => {});
   req.body.image = imageName;
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
 }
   // Save User to Database
@@ -60,6 +72,10 @@ if(req.body.image) {
     rue: req.body.rue,
     numero: req.body.numero,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    image:req.body.image
+>>>>>>> 36639e1 (init)
 =======
     image:req.body.image
 >>>>>>> 36639e1 (init)
@@ -76,8 +92,13 @@ if(req.body.image) {
         });
       } else  {
 <<<<<<< HEAD
+<<<<<<< HEAD
         // set quartier par defaut = 1
         member.setQuartier([4])
+=======
+        // set quartier par defaut = 5 , undefined
+        member.setQuartier([5])
+>>>>>>> 36639e1 (init)
 =======
         // set quartier par defaut = 5 , undefined
         member.setQuartier([5])
@@ -88,6 +109,10 @@ if(req.body.image) {
         competenceRepository.getListCompetence(req.body.Competences)
         .then(competences => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+          
+>>>>>>> 36639e1 (init)
 =======
           
 >>>>>>> 36639e1 (init)
@@ -103,7 +128,11 @@ if(req.body.image) {
       }
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     })
+=======
+     })
+>>>>>>> 36639e1 (init)
 =======
      })
 >>>>>>> 36639e1 (init)
@@ -189,10 +218,14 @@ exports.insert= (req, res, next)=>{
 
 exports.update= (req, res, next)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
    
   if(!req.body.name ){
     return res.status(400).send({ message: "name not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
 =======
  
 >>>>>>> 36639e1 (init)
@@ -203,9 +236,13 @@ exports.update= (req, res, next)=>{
     return res.status(404).send({ message: "You excedeed the number of the characters (50) required. " });
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   if(!req.body.email){
     return res.status(404).send({ message:"email not provided"})
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
 =======
  
 >>>>>>> 36639e1 (init)
@@ -222,10 +259,13 @@ if (req.body.rue > limitString(req.body.rue, 100)){
   return res.status(404).send({ message: "You excedeed the number of the characters (100) required. " });
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 if(isNaN(req.body.numero)){
   return res.status(404).send({ message:"Numero should be a number!!! Not a string"})
 }
 =======
+=======
+>>>>>>> 36639e1 (init)
 if(req.body.numero > limitString(req.body.numero, 10)){
   return res.status(404).send({ message:"You excedeed the number of the characters (10) required. "})
 }
@@ -236,6 +276,9 @@ if(req.body.image) {
   req.body.image = imageName;
 }
 
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
     memberRepository.update(req.params.id, {
         name: req.body.name,
@@ -244,6 +287,7 @@ if(req.body.image) {
         phone: req.body.phone,
         rue: req.body.rue,
         numero: req.body.numero,
+<<<<<<< HEAD
 <<<<<<< HEAD
         QuartierId: req.body.QuartierId
         
@@ -255,6 +299,8 @@ if(req.body.image) {
               } 
           })
 =======
+=======
+>>>>>>> 36639e1 (init)
         image:req.body.image,
         QuartierId:req.body.QuartierId
        
@@ -266,6 +312,9 @@ if(req.body.image) {
           return res.status(200).send({ message: "Member updated successful." });
         }
       })
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
       .catch(err => {
             res.status(500).send({ message: err.message });

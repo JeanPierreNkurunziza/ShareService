@@ -20,7 +20,11 @@ exports.update= (id, quartier)=>{
 }
 exports.delete = (id)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     return db.Quartier.destroy({ wherre : {id : id}} )
+=======
+    return db.Quartier.destroy({ wherre : {id : id}} ) 
+>>>>>>> 36639e1 (init)
 =======
     return db.Quartier.destroy({ wherre : {id : id}} ) 
 >>>>>>> 36639e1 (init)

@@ -33,7 +33,11 @@ exports.findOne = (req, res, next)=>{
 }
 exports.findByName = (req, res, next)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
   quartierRepository.findByName(req.body.quartier)
+=======
+  quartierRepository.getOneByName(req.body.quartier)
+>>>>>>> 36639e1 (init)
 =======
   quartierRepository.getOneByName(req.body.quartier)
 >>>>>>> 36639e1 (init)
@@ -45,7 +49,11 @@ exports.findByName = (req, res, next)=>{
   });
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 exports.getUserId=(req, res, next)=>{
+=======
+exports.getQuartierIdentifiant=(req, res, next)=>{
+>>>>>>> 36639e1 (init)
 =======
 exports.getQuartierIdentifiant=(req, res, next)=>{
 >>>>>>> 36639e1 (init)
@@ -96,9 +104,13 @@ exports.create= (req, res, next)=>{
 
 exports.update= (req, res, next)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
   if(!req.body.quartier ){
     return res.status(404).send({ message: "quartier not provided." });
   }
+=======
+ 
+>>>>>>> 36639e1 (init)
 =======
  
 >>>>>>> 36639e1 (init)
@@ -142,13 +154,19 @@ exports.getQuartierId=(req, res, next)=>{
   quartierRepository.getQuartierId(req.body.quartier)
   .then((data)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     res.json(data)
   })
 =======
+=======
+>>>>>>> 36639e1 (init)
     res.json(data.id)
   })
   .catch(err => {
     res.status(500).send({ message: err.message });
   });
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
 }

@@ -3,6 +3,7 @@ const sequelize = require("sequelize")
 
 exports.getAll =()=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     return db.Service.findAll({ include:[{
         model : db.User, attributes:['username'] },{
             model : db.Member, attributes:['name']}
@@ -14,6 +15,8 @@ exports.getAll =()=>{
 exports.getOne=(id)=>{
     return db.Service.findByPk(id)
 =======
+=======
+>>>>>>> 36639e1 (init)
     return db.Service.findAll(
             { include:
                 [
@@ -36,6 +39,9 @@ exports.getOne=(id)=>{
             ]
         }
         )
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
 }
 

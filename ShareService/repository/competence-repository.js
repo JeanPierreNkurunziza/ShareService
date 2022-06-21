@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const memberCompetenceModel = require("../models/memberCompetence-model");
+
+>>>>>>> 36639e1 (init)
 =======
 const memberCompetenceModel = require("../models/memberCompetence-model");
 
@@ -9,10 +14,13 @@ const Op = db.Sequelize.Op;
 
 exports.getAll =()=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     return db.Competence.findAll()
             
 }
 =======
+=======
+>>>>>>> 36639e1 (init)
     return db.Competence.findAll({ 
       include: {
         model: db.MemberCompetence,
@@ -27,6 +35,9 @@ exports.getAll =()=>{
 //     ]})
             
 // }
+<<<<<<< HEAD
+>>>>>>> 36639e1 (init)
+=======
 >>>>>>> 36639e1 (init)
 
 exports.getOne=(id)=>{
@@ -42,7 +53,11 @@ exports.update= (id, competence)=>{
 }
 exports.delete = (id)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     return db.Competence.destroy({ wherre : {id : id}} )
+=======
+    return db.Competence.destroy({ where : {id : id}} )
+>>>>>>> 36639e1 (init)
 =======
     return db.Competence.destroy({ where : {id : id}} )
 >>>>>>> 36639e1 (init)
